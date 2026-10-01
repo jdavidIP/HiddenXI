@@ -1,0 +1,20 @@
+# Data: raw snapshot and DuckDB scratch are local-only; data/seed/*.csv.gz IS committed
+data/raw/
+data/work.duckdb
+data/work.duckdb.wal
+
+# Secrets
+.env
+
+# Build outputs
+backend/target/
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
