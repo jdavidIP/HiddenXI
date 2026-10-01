@@ -13,7 +13,7 @@ services:
       # runs once, on first start with an empty volume
       - ./infra/db/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d hiddenxi"]
+      test: ["CMD-SHELL", "pg_isready -h localhost -U postgres -d hiddenxi"]
       interval: 5s
       timeout: 3s
       retries: 10
