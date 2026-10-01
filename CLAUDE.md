@@ -104,7 +104,8 @@ Data (details in `docs/02-data-spec.md`):
   (see product spec "Tunable defaults"), never hard-coded.
 - Frontend: function components, hooks, no `any`. Server state via TanStack Query; match
   state (WebSocket events) via a Zustand store.
-- Commits: small and focused, imperative subject line. Run the relevant tests before
+- Commits: small and focused, Conventional Commits subject (`type(scope): imperative summary`,
+  types as in the branch prefixes, e.g. `fix(infra): ...`). Run the relevant tests before
   saying a task is done.
 
 ## Workflow
