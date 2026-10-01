@@ -31,11 +31,10 @@ regardless of what the project is.
 
 - Pushing and opening a PR each require an **explicit, in-turn request** — never implied by
   "start on this" or similar.
-- Before opening a PR, run the `code-reviewer` agent (`.claude/agents/code-reviewer.md`)
-  against the branch diff. Only a clean "ready" verdict clears
-  the gate to `gh pr create`. Any other verdict: stop, show the findings, let the user decide whether
-  to fix, override, or address together — don't silently fix-and-proceed, and don't open the PR
-  anyway because the issues look minor.
+- Before marking a PR ready for review, run `/code-review` against the branch diff. If it
+  reports findings: stop, show them, and let the user decide whether to fix, override, or address
+  together. Don't silently fix-and-proceed, and don't move on because the issues look minor.
+  (No custom reviewer agent exists yet; if one is added under `.claude/agents/`, use it here.)
 
 ## Issues (GitHub)
 
@@ -63,7 +62,7 @@ regardless of what the project is.
   no dependency chain, no port/build collision) and wait for a yes before spawning.
 - When it does happen: always use worktree isolation (never let a subagent run `git switch`/
   `git checkout` in the same working directory), watch for port/infra contention between two running
-  stacks (backend on `4317`, dashboard on `5173`), and keep the review/decision loop serial
+  stacks (Postgres on `5432`, backend on `8080`, frontend on `5173`), and keep the review/decision loop serial
   regardless — concurrency only speeds up the write-code-and-test phase.
 
 ## Working style

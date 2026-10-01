@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: hiddenxi
+  # Passwords come from the repo-root .env (same file docker compose reads).
+  config:
+    import: optional:file:../.env[.properties]
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hiddenxi
+    username: hiddenxi_owner
+    password: ${HIDDENXI_OWNER_PASSWORD}
+  jpa:
+    open-in-view: false
+
+# Tunable game defaults (docs/01-product-spec.md, "Tunable defaults").
+hiddenxi:
+  game:
+    pool-size: 500
+    members-per-prompt: 30
+    group-size-min: 8
+    group-size-max: 60
+    max-group-jaccard: 0.3
+    guess-budget: 25
+    match-duration: 15m
+    min-guess-interval: 1500ms
+    statement-timeout: 3s
+    disconnect-forfeit-after: 60s

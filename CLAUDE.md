@@ -62,9 +62,11 @@ docker-compose.yml        postgres (+ backend/frontend later)
 Keep this section updated as commands become real.
 
 ```bash
-docker compose up -d db                                  # start Postgres
+cp .env.example .env                                     # once; DB passwords read by compose AND Spring
+docker compose up -d db                                  # start Postgres (init script runs only on an empty volume)
+docker compose down -v                                   # wipe the DB volume (needed after changing passwords)
 duckdb data/work.duckdb -c ".read etl/transform.sql"     # regenerate seeds (rarely needed)
-cd backend && ./mvnw spring-boot:run -Dspring-boot.run.profiles=seed   # load seeds into Postgres
+cd backend && ./mvnw spring-boot:run -Dspring-boot.run.profiles=seed   # load seeds into Postgres (Phase 1)
 cd backend && ./mvnw spring-boot:run                     # run API on :8080
 cd backend && ./mvnw verify                              # unit + integration tests
 cd frontend && npm run dev                               # Vite dev server on :5173 (proxies /api, /ws)
@@ -106,6 +108,9 @@ Data (details in `docs/02-data-spec.md`):
   saying a task is done.
 
 ## Workflow
+
+Process rules (commits, branches, PRs, issues) live in `docs/CLAUDE_WORKFLOW.md`. Read it
+at the start of every session and follow it.
 
 1. Find the current phase in `docs/06-implementation-plan.md` and the next unchecked task.
 2. Read the docs that task depends on. Propose a short plan before large changes.

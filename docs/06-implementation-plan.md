@@ -7,16 +7,16 @@ you go (`[x]`). Don't start a phase until the previous phase's definition of don
 
 ## Phase 0 — Scaffold
 
-- [ ] Monorepo layout as in `CLAUDE.md`; `.gitignore` (ignore `data/raw/`, `data/work.duckdb`, build outputs; **commit** `data/seed/*.csv.gz`)
-- [ ] `docker-compose.yml`: `postgres:18` with a named volume, healthcheck, init script dir
+- [x] Monorepo layout as in `CLAUDE.md`; `.gitignore` (ignore `data/raw/`, `data/work.duckdb`, build outputs; **commit** `data/seed/*.csv.gz`)
+- [x] `docker-compose.yml`: `postgres:18` with a named volume, healthcheck, init script dir
       (`infra/db/init/`) that creates the `hiddenxi` database and the owner and sandbox roles
       (see `04-sandbox-security.md` §4), passwords from `.env` (commit `.env.example` only)
-- [ ] Backend: Spring Boot 4.x project (Java 25, Maven wrapper, package `com.hiddenxi`),
+- [x] Backend: Spring Boot 4.x project (Java 25, Maven wrapper, package `com.hiddenxi`),
       dependencies listed in `CLAUDE.md`; Actuator health; `application.yml` with the
       `hiddenxi.game.*` defaults from the product spec, bound to a `@ConfigurationProperties` record
-- [ ] Frontend: Vite + React + TS (strict), ESLint, Vitest, Tailwind; dev proxy for `/api` and `/ws` to `:8080`
-- [ ] GitHub Actions: backend `./mvnw verify` (Testcontainers works on GitHub runners); frontend lint, typecheck, test
-- [ ] README stub: what it is, how to run
+- [x] Frontend: Vite + React + TS (strict), ESLint, Vitest, Tailwind; dev proxy for `/api` and `/ws` to `:8080`
+- [x] GitHub Actions: backend `./mvnw verify` (Testcontainers works on GitHub runners); frontend lint, typecheck, test
+- [x] README stub: what it is, how to run
 
 **Done when:** `docker compose up -d db` + `./mvnw spring-boot:run` → `/actuator/health` is UP;
 `npm run dev` serves a placeholder page; CI is green.

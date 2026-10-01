@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set it in .env}
+      HIDDENXI_OWNER_PASSWORD: ${HIDDENXI_OWNER_PASSWORD:?set it in .env}
+      HIDDENXI_SANDBOX_PASSWORD: ${HIDDENXI_SANDBOX_PASSWORD:?set it in .env}
+    ports:
+      - "5432:5432"
+    volumes:
+      # postgres:18 keeps PGDATA under /var/lib/postgresql/18/docker, so mount the parent
+      - pgdata:/var/lib/postgresql
+      # runs once, on first start with an empty volume
+      - ./infra/db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d hiddenxi"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
