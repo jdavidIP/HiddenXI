@@ -107,6 +107,9 @@ Data (details in `docs/02-data-spec.md`):
 
 ## Workflow
 
+Process rules (commits, branches, PRs, issues) live in `docs/CLAUDE_WORKFLOW.md`. Read it
+at the start of every session and follow it.
+
 1. Find the current phase in `docs/06-implementation-plan.md` and the next unchecked task.
 2. Read the docs that task depends on. Propose a short plan before large changes.
 3. Implement with tests. For anything in the sandbox, add cases to the security test corpus.
